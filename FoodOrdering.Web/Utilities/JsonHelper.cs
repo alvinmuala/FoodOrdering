@@ -25,7 +25,7 @@ namespace FoodOrdering.Web.Utilities
 
         public void WriteToFile(string fileName, string location, string jSONString)
         {
-            string root = "wwwroot";
+            var root = "wwwroot";
             var path = Path.Combine(
                 Directory.GetCurrentDirectory(),
                 root,
