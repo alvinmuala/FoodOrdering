@@ -21,7 +21,7 @@ namespace FoodOrdering.Web.Controllers
         {
             var restaurants = _restaurantService.GetRestaurants();
 
-            return View();
+            return View(restaurants);
         }
 
         public IActionResult Error()
