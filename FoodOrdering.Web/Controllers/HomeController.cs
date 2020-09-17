@@ -1,4 +1,5 @@
 ﻿using FoodOrdering.Web.Models;
+using FoodOrdering.Web.Models.Restaurant;
 using FoodOrdering.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -19,9 +20,23 @@ namespace FoodOrdering.Web.Controllers
 
         public IActionResult Index()
         {
-            var restaurants = _restaurantService.GetRestaurants();
+            return View();
+        }
 
-            return View(restaurants);
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult SearchRestaurant(SearchParameterModel model)
+        {
+            if (!string.IsNullOrWhiteSpace(model.SearchString))
+            {
+                //process and manipulate string
+                //if string parameters exist in json file then do something else return error 
+                //var restaurants = _restaurantService.GetRestaurants();
+            }
+            else
+            {
+                //return error message
+            }
+            return RedirectToAction("Index");
         }
 
         public IActionResult Error()
