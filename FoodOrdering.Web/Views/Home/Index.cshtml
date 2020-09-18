@@ -5,3 +5,8 @@
 
 @await Html.PartialAsync("~/Views/Shared/_SearchBar.cshtml")
 
+@if(ViewBag.ErrorMessage != null)
+{
+    <p style="color:maroon">@ViewBag.ErrorMessage</p>
+}
+
