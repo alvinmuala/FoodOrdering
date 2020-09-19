@@ -103,9 +103,6 @@ legend {
     -ms-flex-align: center;
     align-items: start;
     font-family: 'Poppins', sans-serif;
-    background: url("../images/Search_001.png");
-    background-size: cover;
-    background-position: center center;
     padding: 15px;
 }
 
@@ -280,4 +277,14 @@ legend {
 .restaurant-name {
     font-size: 20px;
     color: dimgrey;
+}
+
+.ui-widget-header, .ui-state-default, ui-button {
+    background: #b9cd6d;
+    border: 1px solid #b9cd6d;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+.ui-dialog-titlebar-close {
+    display: none;
 }

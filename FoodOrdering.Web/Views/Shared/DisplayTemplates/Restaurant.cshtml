@@ -1,5 +1,6 @@
 ﻿@using FoodOrdering.Web.Helpers
 @model FoodOrdering.Web.Models.Restaurant.SearchResultsViewModel
+
 <div class="s01">
     <form asp-action="SearchRestaurants" asp-controller="Home">
         <fieldset>
@@ -41,10 +42,17 @@
             <button class="btn btn-success" id="cbChecked">Order</button>
         </div>
 
+        <div id="success-dialog"
+             title="Success">
+            Your order has been placed! Leave the rest up to the chefs and our drivers
+        </div>
+        <div id="failure-dialog"
+             title="Error">
+            Please select some menu items before placing your order!
+        </div>
+
     </div>
 
 }
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/js/restaurant.js" asp-append-version="true"></script>
 
