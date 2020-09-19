@@ -97,7 +97,7 @@ namespace FoodOrdering.Web.Controllers
             }
             else
             {
-                TempData["ErrorMessage"] = "Oops! Please try again by typing something into the search bar using the format (MenuItem) in (City)" +
+                TempData["ErrorMessage"] = "Oops! Something went wrong! \n Please try again by typing something into the search bar using the format (MenuItem) in (City)" +
                           "\n e.g: Taco in Cape Town";
             }
             return RedirectToAction("Index");
