@@ -45,7 +45,7 @@ namespace FoodOrdering.Web.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult SearchRestaurant(SearchResultsViewModel model)
+        public IActionResult SearchRestaurants(SearchResultsViewModel model)
         {
             if (!string.IsNullOrWhiteSpace(model.SearchString))
             {
