@@ -1,11 +1,12 @@
-﻿@{
+﻿@model FoodOrdering.Web.Models.Restaurant.SearchResultsViewModel
+@{
     ViewData["Title"] = "Feed me now";
 }
 
 
-@await Html.PartialAsync("~/Views/Shared/_SearchBar.cshtml")
+@await Html.PartialAsync("~/Views/Shared/DisplayTemplates/Restaurant.cshtml", Model)
 
-@if(ViewBag.ErrorMessage != null)
+@if (ViewBag.ErrorMessage != null)
 {
     <p style="color:maroon">@ViewBag.ErrorMessage</p>
 }

@@ -1,4 +1,4 @@
-﻿@model FoodOrdering.Web.Models.Restaurant.SearchParameterModel
+﻿@model FoodOrdering.Web.Models.Restaurant.SearchResultsViewModel
 <div class="s01">
     <form asp-action="SearchRestaurant" asp-controller="Home">
         <fieldset>
@@ -6,7 +6,7 @@
         </fieldset>
         <div class="inner-form">
             <div class="input-field first-wrap">
-                <input asp-for="SearchString" id="search" type="text" placeholder="e.g: Tacos in Cape Town" />
+                <input asp-for="SearchString" id="search" type="text" placeholder="e.g: Taco in Cape Town" />
             </div>
             <div class="input-field third-wrap">
                 <button class="btn-search" type="submit">Search</button>
@@ -14,3 +14,8 @@
         </div>
     </form>
 </div>
+
+@if(ViewBag.DisplaySearchResults)
+{
+    <p>Testing</p>
+}

@@ -3,6 +3,7 @@ using FoodOrdering.Web.Models.Restaurant;
 using FoodOrdering.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -22,21 +23,34 @@ namespace FoodOrdering.Web.Controllers
 
         public IActionResult Index()
         {
+            var model = new SearchResultsViewModel();
             var errorMessage = TempData["ErrorMessage"];
-            if ( errorMessage!= null)
+
+            if (errorMessage != null)
             {
                 ViewBag.ErrorMessage = errorMessage;
             }
-            
-            return View();
+
+            var displaySearchResults = TempData["SearchResults"] != null ? true : false;
+            ViewBag.DisplaySearchResults = displaySearchResults;
+
+            if (displaySearchResults)
+            {
+                var searchResults = TempData["SearchResults"] as string;
+                model = JsonConvert.DeserializeObject<SearchResultsViewModel>(searchResults);
+                return View(model);
+            }
+
+            return View(model);
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult SearchRestaurant(SearchParameterModel model)
+        public IActionResult SearchRestaurant(SearchResultsViewModel model)
         {
             if (!string.IsNullOrWhiteSpace(model.SearchString))
             {
                 var searchString = model.SearchString.ToUpperInvariant();
+
                 if (searchString.Contains("IN"))
                 {
                     var stringsSplit = searchString.Split(new string[] { "IN" }, StringSplitOptions.None);
@@ -46,20 +60,29 @@ namespace FoodOrdering.Web.Controllers
                     var city = stringsSplit[1].TrimStart().TrimEnd();
 
                     var restaurants = _restaurantService.GetRestaurants();
-                    
 
-                    //todo: add some filtering 
                     var query = restaurants
                         .Where(r => r.City.ToUpperInvariant() == city &&
-                            (r.Categories.Any(c => c.Name.ToUpperInvariant().Contains(menuItem) || c.MenuItems.Any(mi => mi.Name.ToUpperInvariant().Contains(menuItem))))
-                        ).ToList();
+                            (r.Categories.Any(c => c.Name.ToUpperInvariant().Contains(menuItem) || c.MenuItems.Any(mi => mi.Name.ToUpperInvariant().Contains(menuItem)))))
+                        .OrderBy(x => x.Rank)
+                        .ToList();
 
-                    if(query.Count == 0)
+
+                    if (query.Count == 0)
                     {
                         TempData["ErrorMessage"] = "Ooops! No restaurant is serving what you are looking for at the moment. \n Please try something else. " +
                             "\n e.g: Taco in Cape Town";
 
                         RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        model.Restaurants = query;
+                        model.City = query.First().City;
+                        model.MenuItemName = menuItem;
+
+                        TempData["SearchResults"] = JsonConvert.SerializeObject(model);
+                        return RedirectToAction("Index");
                     }
                 }
                 else
