@@ -4,17 +4,8 @@ namespace FoodOrdering.Data
 {
     public class FoodOrderingDbContext : DbContext
     {
-        public FoodOrderingDbContext()
+        public FoodOrderingDbContext(DbContextOptions<FoodOrderingDbContext> options): base(options)
         {
         }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-        }
-
     }
 }
