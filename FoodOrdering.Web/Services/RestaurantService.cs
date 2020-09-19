@@ -22,7 +22,7 @@ namespace FoodOrdering.Web.Services
             }
             catch (Exception ex)
             {
-                //todo: future improvements- some .NET Logging tools such as Elmah should be used here for exceptions and errors logging here 
+                //todo: future improvements- some .NET Logging tools such as Elmah should be used here for exception and error logging here 
                 throw new Exception(ex.Message);
             }
         }
