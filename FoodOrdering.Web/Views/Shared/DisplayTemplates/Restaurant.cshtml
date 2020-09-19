@@ -22,25 +22,29 @@
     <div class="restaurant-results-header">
         <p class="results-header-text"><b style="font-style:italic">@Model.MenuItemName </b> restaurants in <b style="font-style:italic">@Model.City</b> we found for you: </p>
     </div>
-    <div class="search-results" >
-        @foreach(var restaurant in Model.Restaurants)
+    <div class="search-results">
+        @foreach (var restaurant in Model.Restaurants)
         {
             <p class="restaurant-name"><img src="@restaurant.LogoPath" alt="logo" style="width:100px; height:100px;" />@restaurant.Name - @restaurant.Suburb - rated #@restaurant.Rank overall</p>
-            foreach(var category in restaurant.Categories.Where(c => c.MenuItems.Any(mi => mi.Name.Contains(@Model.MenuItemName))))
+            foreach (var category in restaurant.Categories.Where(c => c.MenuItems.Any(mi => mi.Name.Contains(@Model.MenuItemName))))
             {
                 <p><b>@category.Name</b></p>
-                foreach(var menuItem in category.MenuItems)
+                foreach (var menuItem in category.MenuItems)
                 {
-                    <p><input type="checkbox" id="checkbox-item_@menuItem.Id" name="menuItemCheckBox"> @menuItem.Name - @CurrencyHelper.TruncatedCurrency(menuItem.Price, "R")</p>
+                    <p><input type="checkbox" id="checkbox-item_@menuItem.Id" name="menuItemCheckBox" value="@menuItem.Price"> @menuItem.Name - @CurrencyHelper.TruncatedCurrency(menuItem.Price, "R")</p>
                 }
             }
-            <br/>
-            <br/>
+            <br />
+            <br />
         }
         <div class="button-center">
-            <button class="btn btn-success">Order</button>
+            <button class="btn btn-success" id="cbChecked">Order</button>
         </div>
-        
+
     </div>
 
 }
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/restaurant.js" asp-append-version="true"></script>
+
