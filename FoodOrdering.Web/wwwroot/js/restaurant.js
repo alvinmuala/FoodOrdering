@@ -2,8 +2,7 @@
     $("#success-dialog").dialog({
         autoOpen: false,
         buttons: {
-            OK: function ()
-            {
+            OK: function () {
                 $(this).dialog("close");
                 location.reload();
             }
@@ -12,15 +11,15 @@
     $("#failure-dialog").dialog({
         autoOpen: false,
         buttons: {
-            OK: function ()
-            {
+            OK: function () {
                 $(this).dialog("close");
             }
         },
     });
-    //$("#cbChecked").click(function () {
-    //    $("#failure-dialog").dialog("open");
-    //});
+    $("#cbChecked").click(function () {
+        $("#failure-dialog").dialog("open");
+        $("#success-dialog").dialog("close");
+    });
     $("input[type='checkbox']").change(function () {
         var cbChecked = new Array();
 
@@ -30,14 +29,16 @@
 
         if (cbChecked.length == 0) {
             $("button#cbChecked").html("Order");
-            //$("#cbChecked").click(function () {
-            //    $("#failure-dialog").dialog("open");
-            //});
+            $("#cbChecked").click(function () {
+                $("#failure-dialog").dialog("open");
+                $("#success-dialog").dialog("close");
+            });
         }
         else {
             $("button#cbChecked").html("Order - " + "R" + $.sum(cbChecked));
             $("#cbChecked").click(function () {
                 $("#success-dialog").dialog("open");
+                $("#failure-dialog").dialog("close");
             });
         }
     });  
