@@ -31,7 +31,7 @@
                 <p><b>@category.Name</b></p>
                 foreach(var menuItem in category.MenuItems)
                 {
-                    <p><input type="checkbox" id="@menuItem.Id" name="menuItemCheckBox"> @menuItem.Name - @CurrencyHelper.TruncatedCurrency(menuItem.Price, "R")</p>
+                    <p><input type="checkbox" id="checkbox-item_@menuItem.Id" name="menuItemCheckBox"> @menuItem.Name - @CurrencyHelper.TruncatedCurrency(menuItem.Price, "R")</p>
                 }
             }
             <br/>
