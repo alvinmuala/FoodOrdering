@@ -96,13 +96,12 @@ legend {
 }
 
 .s01 {
-    min-height: 100vh;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-pack: center;
     justify-content: center;
     -ms-flex-align: center;
-    align-items: center;
+    align-items: start;
     font-family: 'Poppins', sans-serif;
     background: url("../images/Search_001.png");
     background-size: cover;
@@ -112,7 +111,7 @@ legend {
 
 .s01 form {
         width: 100%;
-        max-width: 1290px;
+        max-width: 1000px;
     }
 
 .s01 form legend {
@@ -258,3 +257,27 @@ legend {
                 }
 }
 
+.restaurant-results-header {
+    display:flex; 
+    justify-content:center;
+}
+.results-header-text {
+    font-size: 28px;
+}
+.search-results {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}
+
+.button-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.restaurant-name {
+    font-size: 20px;
+    color: dimgrey;
+}

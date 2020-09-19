@@ -1,4 +1,5 @@
-﻿@model FoodOrdering.Web.Models.Restaurant.SearchResultsViewModel
+﻿@using FoodOrdering.Web.Helpers
+@model FoodOrdering.Web.Models.Restaurant.SearchResultsViewModel
 <div class="s01">
     <form asp-action="SearchRestaurants" asp-controller="Home">
         <fieldset>
@@ -15,7 +16,31 @@
     </form>
 </div>
 
-@if(ViewBag.DisplaySearchResults)
+
+@if (ViewBag.DisplaySearchResults)
 {
-    <p>Testing</p>
+    <div class="restaurant-results-header">
+        <p class="results-header-text"><b style="font-style:italic">@Model.MenuItemName </b> restaurants in <b style="font-style:italic">@Model.City</b> we found for you: </p>
+    </div>
+    <div class="search-results" >
+        @foreach(var restaurant in Model.Restaurants)
+        {
+            <p class="restaurant-name"><img src="@restaurant.LogoPath" alt="logo" style="width:100px; height:100px;" />@restaurant.Name - @restaurant.Suburb - rated #@restaurant.Rank overall</p>
+            foreach(var category in restaurant.Categories.Where(c => c.MenuItems.Any(mi => mi.Name.Contains(@Model.MenuItemName))))
+            {
+                <p><b>@category.Name</b></p>
+                foreach(var menuItem in category.MenuItems)
+                {
+                    <p>@menuItem.Name - @CurrencyHelper.TruncatedCurrency(menuItem.Price, "R")</p>
+                }
+            }
+            <br/>
+            <br/>
+        }
+        <div class="button-center">
+            <button class="btn btn-success">Order</button>
+        </div>
+        
+    </div>
+
 }

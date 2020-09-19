@@ -79,6 +79,7 @@ namespace FoodOrdering.Web.Controllers
                     {
                         model.Restaurants = query;
                         model.City = query.First().City;
+                        menuItem = char.ToUpper(menuItem.First()) + menuItem.Substring(1).ToLower();
                         model.MenuItemName = menuItem;
 
                         TempData["SearchResults"] = JsonConvert.SerializeObject(model);
